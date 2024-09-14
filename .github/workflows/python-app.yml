@@ -40,10 +40,9 @@ jobs:
       run: |
         mkdir -p static
         nohup python ./app.py&
-        curl -L http://127.0.0.1:5000/
+        curl -L http://127.0.0.1:5000/content
     - name: check
       run: |
-        mkdir -p static
         cp -R web/static/assets static/
         cp web/templates/rendered/* static/
         cd static

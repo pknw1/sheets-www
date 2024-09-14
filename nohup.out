@@ -6,3 +6,4 @@ Running code after Flask application start
  * Running on http://149.202.72.112:5555
 [33mPress CTRL+C to quit[0m
 127.0.0.1 - - [14/Sep/2024 01:31:27] "[32mGET / HTTP/1.1[0m" 302 -
+149.202.72.112 - - [14/Sep/2024 01:35:20] "[32mGET / HTTP/1.1[0m" 302 -

@@ -206,4 +206,3 @@ def app_page(name=None):
 if __name__ == "__main__":
     webbrowser.open('http://localhost:5000/')
     app.run(debug=True)
-    app.before_first_request(app_index)
