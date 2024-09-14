@@ -37,6 +37,9 @@ jobs:
       env:
         HEADLESS: "True"
       run: |
-        python ./app.py 
+        nohup python ./app.py&
+        curl -L http://127.0.0.1:5000/
+
+
 
 
