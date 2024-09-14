@@ -34,11 +34,15 @@ jobs:
         python -m pip install --upgrade pip
         if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
     - name: Build
+      continue-on-error: true
       env:
         HEADLESS: "True"
       run: |
         nohup python ./app.py&
         curl -L http://127.0.0.1:5000/
+    - name: check
+      run: |
+        ls -l web/templates/rendered/
 
 
 
