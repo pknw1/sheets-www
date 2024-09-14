@@ -1,5 +1,5 @@
 
-name: Python application
+name: SSH
 
 on:
   workflow_dispatch
