@@ -48,7 +48,8 @@ jobs:
         chmod 600 id_rsa
         cp -R web/static/assets static/
         cp web/templates/rendered/* static/
-        scp -r -o "StrictHostKeyChecking=no" -P 69 -i ./id_rsa static/* wwwxfr@ks5.pknw1.co.uk:/media/www/dolly/www 
+        scp -r -o "StrictHostKeyChecking=no" -P 69 -i ./id_rsa web/static/assets wwwxfr@ks5.pknw1.co.uk:/media/www/dolly/www/ 
+        scp -r -o "StrictHostKeyChecking=no" -P 69 -i ./id_rsa web/templates/rendered/index* wwwxfr@ks5.pknw1.co.uk:/media/www/dolly/www/
         cd static
         tar -zcvf ../static.tgz *
     - name: Archive
