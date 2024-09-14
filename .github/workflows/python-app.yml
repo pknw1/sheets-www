@@ -38,9 +38,8 @@ jobs:
       env:
         HEADLESS: "True"
       run: |
-        mkdir -p static
-        nohup python ./app.py&
-        curl -L http://127.0.0.1:5000/content
+        python ./app.py&
+        sleep 10 && curl -L http://localhost:5000/
     - name: check
       run: |
         cp -R web/static/assets static/
