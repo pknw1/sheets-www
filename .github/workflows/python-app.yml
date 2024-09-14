@@ -38,6 +38,7 @@ jobs:
       env:
         HEADLESS: "True"
       run: |
+        mkdir -p static
         nohup python ./app.py&
         curl -L http://127.0.0.1:5000/
     - name: check

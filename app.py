@@ -1,12 +1,14 @@
-from flask import Flask, request, render_template, redirect
+from flask import Flask, request, render_template, redirect, current_app
 import pygsheets
 import re
 import os
 import signal
 import sys
+import webbrowser
 
 client = pygsheets.authorize(service_file='config/auth.json')
 headless = os.environ['HEADLESS']
+
 app = Flask(__name__,
         static_url_path='/assets',
         static_folder='web/static/assets',
@@ -22,6 +24,10 @@ def shutdown_flask(self):
     from win32api import GenerateConsoleCtrlEvent
     CTRL_C_EVENT = 0
     GenerateConsoleCtrlEvent(CTRL_C_EVENT, 0)
+
+with app.app_context():
+    # Code to run after the Flask application has started
+    print("Running code after Flask application start")
 
 
 @app.route('/shutdown', methods=['GET','POST'])
@@ -89,6 +95,7 @@ def app_data():
     f.write(response)
     f.close()
     #return redirect("/", code=302)
+    shutdown()
     if headless == True:
         response = redirect('/shutdown')
     else:
@@ -197,5 +204,6 @@ def app_page(name=None):
 
 
 if __name__ == "__main__":
+    webbrowser.open('http://localhost:5000/')
     app.run(debug=True)
-
+    app.before_first_request(app_index)
