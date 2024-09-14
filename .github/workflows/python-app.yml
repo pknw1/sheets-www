@@ -42,7 +42,6 @@ jobs:
         sleep 10 && curl -L http://localhost:5000/
     - name: check
       run: |
-        mkdir -p static
         cp -R web/static/assets static/
         cp web/templates/rendered/* static/
         cd static
