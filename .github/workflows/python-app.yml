@@ -4,8 +4,9 @@
 name: Python application
 
 on:
-  workflow_dispatch
-
+  workflow_dispatch:
+  repository_dispatch:
+    types: [test]
 permissions:
   contents: read
 
