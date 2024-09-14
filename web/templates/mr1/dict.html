@@ -53,7 +53,7 @@
 						<a class="nav-link link text-black dropdown-toggle display-4" href="/" aria-expanded="false" data-toggle="dropdown-submenu" data-bs-toggle="dropdown" data-bs-auto-close="outside">Events</a><div class="dropdown-menu" data-bs-popper="none" aria-labelledby="dropdown-740"><a class="text-black dropdown-item display-4" href="#upcoming-events">Upcoming</a><a class="text-black dropdown-item display-4" href="#previous-events">Previous</a></div>
 					</li>
 					<li class="nav-item dropdown">
-						<a class="nav-link link text-black dropdown-toggle display-4" href="/" data-toggle="dropdown-submenu" data-bs-toggle="dropdown" data-bs-auto-close="outside">Contact</a><div class="dropdown-menu" data-bs-popper="none" aria-labelledby="dropdown-304"><a class="text-black dropdown-item display-4" href="/">Contact</a><a class="text-black dropdown-item display-4" href="#bookings">Bookings</a><a class="text-black dropdown-item display-4" href="/">Socials</a></div>
+						<a class="nav-link link text-black dropdown-toggle display-4" href="/" data-toggle="dropdown-submenu" data-bs-toggle="dropdown" data-bs-auto-close="outside">Contact</a><div class="dropdown-menu" data-bs-popper="none" aria-labelledby="dropdown-304"><a class="text-black dropdown-item display-4" href="/">Contact</a><a class="text-black dropdown-item display-4" href="#bookings">Bookings</a><a class="text-black dropdown-item display-4" href="javascript:OpenModal('modal2')">Socials</a></div>
 					</li></ul>
 				
 				
@@ -74,13 +74,20 @@
 		<strong>{{ page_data['header_title'] }} </strong>
         </h1>
         <p class="mbr-fonts-style mbr-text mb-4 display-7">
-	{{ page_data['header_text'] }}
+	<div class="image-wrapper">
+        	<img class="w-100" src="assets/default/images/logo.png" alt="Mobirise Website Builder">
+        </div>
+	</p>
+	        <p class="mbr-fonts-style mbr-description mt-4 display-7">
+        {{ page_data['header_text'] }}
         </p>
+	{% if page_data['header_button_text'] != '' %}
         <div class="mbr-section-btn">
 		<a class="btn btn-warning display-7" href="{{ page_data['header_button_link'] }}">
 		  {{ page_data['header_button_text'] }}
           </a>
         </div>
+	{% endif %}
         <p class="mbr-fonts-style mbr-description mt-4 display-7">
 	{{ page_data['header_footer_text'] }}
         </p>
@@ -88,6 +95,42 @@
     </div>
   </div>
 </section>
+
+
+
+
+
+<section data-bs-version="5.1" class="header1 cid-unUdA4cHY1 mbr-fullscreen" id="header01-4">
+
+        <div class="container">
+                <div class="row justify-content-center">
+                        <div class="col-12 col-md-12 col-lg-6 image-wrapper">
+                                <img class="w-50" src="assets/default/images/deannajadeas-w.png" alt="Mobirise Website Builder">
+                        </div>
+                        <div class="col-12 col-lg col-md-12">
+                        <p class="mbr-text mbr-fonts-style mb-4 display-7">
+                        Enter your email address to receive our email newsletter
+                        </p>
+                                <div class="text-wrapper align-left">
+       <form name="submit-to-google-sheet">
+        <input name="type" type="string" value="newsletter" hidden>
+
+        <div class="row">
+            <div hidden="hidden" data-form-alert="" class="alert alert-success col-12">Thanks for filling out the form!</div>
+            <div hidden="hidden" data-form-alert-danger="" class="alert alert-danger col-12">Oops...! some problem!</div>
+        </div>
+        <div class="dragArea row">
+            <div class="col-md col-sm-12 form-group mb-3" data-for="email"><input type="email" name="email" placeholder="Newsletter Signup" data-form-field="email" class="form-control" value="" id="email-article05-e"></div>
+            <div class="col-lg-12 col-md-12 col-sm-12 align-center mbr-section-btn"><input onclick="javascript:OpenModal('modal')"  class="btn btn-white-outline display-7" type="submit" value="Newsletter Signup" /></div>
+        </div>
+    </form>
+                                </div>
+                        </div>
+                </div>
+        </div>
+</section>
+
+
 
 {% if page_data['page2_title'] != '' %}
 <section data-bs-version="5.1" class="header1 cid-unUdA4cHY1 mbr-fullscreen" id="header01-4">
@@ -109,7 +152,9 @@
 					<p class="mbr-text mbr-fonts-style mb-4 display-7">
 					{{ page_data['page2_text'] }}
 					</p>
+					{% if page_data['page2_button_text'] != '' %}
 					<div class="mbr-section-btn mt-3"><a class="btn btn-white-outline display-7" href="{{ page_data['page2_button_link'] }}">{{ page_data['page2_button_text'] }}</a></div>
+					{% endif %}
 				</div>
 			</div>
 		</div>
@@ -153,17 +198,18 @@
       </div>
       <div class="col-12 col-lg item-wrapper">
         <h5 class="mbr-card-title mbr-fonts-style mt-3 mb-3 display-5">
-		<strong>{{event[1] }} - {{ event[11] }} </strong>
+		<strong>{{event[1] }} - <a href="{{event[12]}}" >{{ event[11] }}</a> </strong>
         </h5>
+	<h6 class="mbr-card-title mbr-fonts-style mt-3 mb-3 display-5">Stage@ {{ event[2] }} ({{ event[3] }} hrs)</h6>
         <h6 class="mbr-card-subtitle mbr-fonts-style mt-0 mb-3 display-7">
-		{{ event[12] }}
+                <a title="reminder" class="fa fa-bell" style="font-size:28px;" href="{{event[2]}}" target="_new"></a>
+		<a class="fa fa-map-pin" style="font-size:28px;" href="{{event[13]}}" target="_new"></a>
+		<a class="fa fa-ticket" style="font-size:28px;" href="{{event[14]}}" target="_new"></a>
+                <a class="fa fa-link" style="font-size:28px;" href="{{event[23]}}" target="_new"></a>
         </h6>
         <p class="mbr-text mbr-fonts-style mt-0 mb-3 display-7">
 	{{ event[20] }}
         </p>
-	{% if event[23] != '' %}
-	<div class="mbr-section-btn"><a class="btn btn-white display-7" href="{{ event[23] }}" target="_new">More Info</a></div>
-	{% endif %}
       </div>
     </div>
     {% endfor %}
@@ -368,7 +414,7 @@
 
 	
 	
-	<div><div class="modal fade" id="modal" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">  <div class="modal-dialog  " style="height:auto" role="document">    <div class="modal-content"><div class="modal-header">  <h5 class="no-anim modal-title display-7" id="modalLabel">Modal title</h5>  <a href="#" class="no-anim close" data-bs-dismiss="modal" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></a></div><div class="modal-body display-7" id="modal_body">Modal body text goes here.</div><div class="modal-footer"><div class="mbr-section-btn"><a href="#" class="no-anim btn btn-secondary display-4" data-bs-dismiss="modal" data-dismiss="modal">Close</a></div></div>    </div>  </div></div><script> 
+	<div><div class="modal fade" id="modal" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">  <div class="modal-dialog  " style="height:auto" role="document">    <div class="modal-content"><div class="modal-header">  <h5 class="no-anim modal-title display-7" id="modalLabel">Confirmation</h5>  <a href="#" class="no-anim close" data-bs-dismiss="modal" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></a></div><div class="modal-body display-7" id="modal_body">Your request has been registered.</div><div class="modal-footer"><div class="mbr-section-btn"><a href="javascript:window.location.reload(true)" class="no-anim btn btn-secondary display-4" data-bs-dismiss="modal" data-dismiss="modal">Close</a></div></div>    </div>  </div></div><script> 
 document.addEventListener("DOMContentLoaded", function() { 
   if(typeof jQuery === "function") {
     $("#modal").on("hidden.bs.modal", function () { 
@@ -425,6 +471,98 @@ document.addEventListener("DOMContentLoaded", function() {
 	</script>
 
 </section>
+
+<section class="mbr-section" id="witsec-modal-window-block-9" data-rv-view="103">
+
+	<style>
+	/* Let's not animate the contents of modal windows */
+	.no-anim {
+		-webkit-animation: none !important;
+		-moz-animation: none !important;
+		-o-animation: none !important;
+		-ms-animation: none !important;
+		animation: none !important;
+	}
+	</style>
+
+
+
+	<div><div class="modal fade" id="modal2" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">  <div class="modal-dialog  " style="height:auto" role="document">    <div class="modal-content"><div class="modal-header">  <h5 class="no-anim modal-title display-7" id="modalLabel">Modal title</h5>  <a href="#" class="no-anim close" data-bs-dismiss="modal" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></a></div><div class="modal-body display-7" id="modal_body">
+	<div class="col-lg-11 mx-auto mbr-form" data-form-type="formoid">
+    <form name="submit-to-google-sheet">
+        <input name="type" type="string" value="newsletter" hidden>
+
+        <div class="row">
+            <div hidden="hidden" data-form-alert="" class="alert alert-success col-12">Thanks for filling out the form!</div>
+            <div hidden="hidden" data-form-alert-danger="" class="alert alert-danger col-12">Oops...! some problem!</div>
+        </div>
+        <div class="dragArea row">
+            <div class="col-md col-sm-12 form-group mb-3" data-for="email"><input type="email" name="email" placeholder="Newsletter Signup" data-form-field="email" class="form-control" value="" id="email-article05-e"></div>
+            <div class="col-lg-12 col-md-12 col-sm-12 align-center mbr-section-btn"><input onclick="javascript:OpenModal('modal')"  class="btn btn-white-outline display-7" type="submit" value="Submit Newsletter Request" /></div>
+        </div>
+    </form>
+</div>
+
+	</div><div class="modal-footer"><div class="mbr-section-btn"><a href="#" class="no-anim btn btn-secondary display-4" data-bs-dismiss="modal" data-dismiss="modal">Close</a></div></div>    </div>  </div></div><script>
+document.addEventListener("DOMContentLoaded", function() {
+  if(typeof jQuery === "function") {
+    $("#modal").on("hidden.bs.modal", function () {
+      var html = $( "#modal_body" ).html();
+      $( "#modal_body" ).empty();
+      $( "#modal_body" ).append(html);
+    })
+  } else {
+      var mdw = document.getElementById("#modal2")
+      mdw.addEventListener("hidden.bs.modal", function(event) {
+        mdw.innerHTML = mdw.innerHTML;
+      });
+  }
+});
+</script></div>
+
+	<script>
+	if (typeof OpenModal === 'undefined') {
+		OpenModal = function(modalName) {
+			if(typeof jQuery === "function") {
+				if ($('#' + modalName).length)
+					$('#' + modalName).modal('show');
+				else
+					alert("Sorry, but there is no modal for " + modalName);
+			} else {
+				let mdw = new bootstrap.Modal(document.getElementById(modalName), {});
+				mdw.show();
+			}
+		}
+	}
+
+	function modalSetCookie(cname, cvalue, exdays) {
+		var d = new Date();
+		d.setTime(d.getTime() + (exdays*24*60*60*1000));
+		var expires = "expires="+ d.toUTCString();
+		document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
+	}
+
+	function modalGetCookie(cname) {
+		var name = cname + "=";
+		var decodedCookie = decodeURIComponent(document.cookie);
+		var ca = decodedCookie.split(';');
+		for(var i = 0; i <ca.length; i++) {
+			var c = ca[i];
+			while (c.charAt(0) == ' ') {
+				c = c.substring(1);
+			}
+			if (c.indexOf(name) == 0) {
+				return c.substring(name.length, c.length);
+			}
+		}
+		return "";
+	}
+	</script>
+
+</section>
+
+
+
 <!--
 <section data-bs-version="5.1" class="social02 cid-uo6PvUSlN1" id="social02-l">
 
