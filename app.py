@@ -3,6 +3,7 @@ import pygsheets
 import re
 import os
 import signal
+import sys
 
 client = pygsheets.authorize(service_file='config/auth.json')
 headless = os.environ['HEADLESS']
@@ -26,6 +27,7 @@ def shutdown_flask(self):
 @app.route('/shutdown', methods=['GET','POST'])
 def shutdown():
     pid = os.getpid()
+    sys.exit(0)
     os.kill(pid, signal.SIGKILL)
     return str(pid)
 
