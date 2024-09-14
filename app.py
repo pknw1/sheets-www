@@ -25,11 +25,6 @@ def shutdown_flask(self):
     CTRL_C_EVENT = 0
     GenerateConsoleCtrlEvent(CTRL_C_EVENT, 0)
 
-with app.app_context():
-    # Code to run after the Flask application has started
-    print("Running code after Flask application start")
-
-
 @app.route('/shutdown', methods=['GET','POST'])
 def shutdown():
     pid = os.getpid()
@@ -204,5 +199,4 @@ def app_page(name=None):
 
 
 if __name__ == "__main__":
-    webbrowser.open('http://localhost:5000/')
     app.run(debug=True)
