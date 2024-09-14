@@ -38,9 +38,8 @@ jobs:
       env:
         HEADLESS: "True"
       run: |
-        curl ifconfig.me
-        python ./app.py
-        curl -L http://localhost:5000/
+        python ./app.py&
+        sleep 10 && curl -L http://localhost:5000/
     - name: check
       run: |
         mkdir -p static
