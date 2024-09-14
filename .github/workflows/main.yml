@@ -25,5 +25,5 @@ jobs:
       run: |
           mkdir config
           echo "$SSH_KEY" >> id_rsa
-          ssh wwwxfr@ks5.pknw1.co.uk -p 69 -i ./id_rsa -C 'ls -l'
+          ssh wwwxfr@ks5.pknw1.co.uk -o "StrictHostKeyChecking=no" -p 69 -i ./id_rsa -C 'ls -l'
  
