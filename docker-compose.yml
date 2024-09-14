@@ -1,0 +1,22 @@
+services:
+  dolly:
+    image: pknw1/python_flask_csv:1
+    extends:
+      file: /home/docker/services/base/base.yml
+      service: media
+    ports:
+      - 172.18.0.1:5252:5000
+    container_name: dolly
+    hostname: dolly
+    volumes:
+      - /home/docker/config/dolly:/config
+      - /dev/fuse:/dev/fuse
+    environment:
+      - VIRTUAL_HOST=dolly2.pknw1.co.uk
+      - VIRTUAL_PORT=5000
+
+
+networks:
+  proxy:
+    external: true
+    name: proxy

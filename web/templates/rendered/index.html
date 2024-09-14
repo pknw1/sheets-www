@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html  >
+<head>
+  <!-- Site made with Mobirise Website Builder v5.9.18, https://mobirise.com -->
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="generator" content="Mobirise v5.9.18, mobirise.com">
+  <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1">
+  <link rel="shortcut icon" href="assets/splash/images/logo5.png" type="image/x-icon">
+  <meta name="description" content="">
+  
+  
+  <title>Home</title>
+  <link rel="stylesheet" href="assets/splash/bootstrap/css/bootstrap.min.css">
+  <link rel="stylesheet" href="assets/splash/bootstrap/css/bootstrap-grid.min.css">
+  <link rel="stylesheet" href="assets/splash/bootstrap/css/bootstrap-reboot.min.css">
+  <link rel="stylesheet" href="assets/splash/theme/css/style.css">
+  <link rel="preload" href="https://fonts.googleapis.com/css?family=Inter+Tight:100,200,300,400,500,600,700,800,900,100i,200i,300i,400i,500i,600i,700i,800i,900i&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
+  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inter+Tight:100,200,300,400,500,600,700,800,900,100i,200i,300i,400i,500i,600i,700i,800i,900i&display=swap"></noscript>
+  <link rel="preload" as="style" href="assets/splash/mobirise/css/mbr-additional.css?v=nieXZh"><link rel="stylesheet" href="assets/splash/mobirise/css/mbr-additional.css?v=nieXZh" type="text/css">
+
+  
+  
+  
+</head>
+<body>
+  
+  <section data-bs-version="5.1" class="header1 cid-unUdA4cHY1 mbr-fullscreen" id="header01-4">
+	
+
+	
+	
+
+	<div class="container">
+		<div class="row justify-content-center">
+			<div class="col-12 col-md-12 col-lg-6 image-wrapper">
+				<img class="w-100" src="assets/splash/images/logo.png" alt="Mobirise Website Builder">
+			</div>
+			<div class="col-12 col-lg col-md-12">
+				<div class="text-wrapper align-left">
+					<h1 class="mbr-section-title mbr-fonts-style mb-4 display-2">
+						<strong>[Header Title]</strong></h1>
+					<p class="mbr-text mbr-fonts-style mb-4 display-7">
+						 [Header Text]</p>
+					<div class="mbr-section-btn mt-3"><a class="btn btn-white-outline display-7" href="https://dollyparton.com">Dolly.com</a> <a class="btn btn-white-outline display-7" href="javascript:OpenModal('modal')"></a></div>
+				</div>
+			</div>
+<form name="submit-to-google-sheet">
+  <input name="email" type="email" placeholder="Subscribe to Newsletter" required>
+  <input name="type" type="string" value="newsletter" hidden>
+          <!--<input onclick="window.location.href = 'https://pklogin.pknw1.co.uk/';" hidden type="submit" value="Submit request" />
+	-->
+          <input onclick="javascript:OpenModal('modal')" hidden type="submit" value="Submit request" />
+
+</form>
+
+		</div>
+	</div>
+</section>
+
+<section class="mbr-section" id="witsec-modal-window-block-9" data-rv-view="103">
+
+	<style>
+	/* Let's not animate the contents of modal windows */
+	.no-anim {
+		-webkit-animation: none !important;
+		-moz-animation: none !important;
+		-o-animation: none !important;
+		-ms-animation: none !important;
+		animation: none !important;
+	}
+	</style>
+
+	
+	
+	<div><div class="modal fade" id="modal" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">  <div class="modal-dialog  " style="height:auto" role="document">    <div class="modal-content"><div class="modal-header">  <h5 class="no-anim modal-title display-7" id="modalLabel">Modal title</h5>  <a href="/" class="no-anim close" data-bs-dismiss="modal" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></a></div><div class="modal-body display-7" id="modal_body">Modal body text goes here.</div><div class="modal-footer"><div class="mbr-section-btn"><a href="/" class="no-anim btn btn-secondary display-4" data-bs-dismiss="modal" data-dismiss="modal">Close</a></div></div>    </div>  </div></div><script> 
+document.addEventListener("DOMContentLoaded", function() { 
+  if(typeof jQuery === "function") {
+    $("#modal").on("hidden.bs.modal", function () { 
+      var html = $( "#modal_body" ).html(); 
+      $( "#modal_body" ).empty(); 
+      $( "#modal_body" ).append(html); 
+    }) 
+  } else { 
+      var mdw = document.getElementById("#modal") 
+      mdw.addEventListener("hidden.bs.modal", function(event) { 
+        mdw.innerHTML = mdw.innerHTML; 
+      }); 
+  } 
+}); 
+</script></div>
+
+	<script>
+	if (typeof OpenModal === 'undefined') {
+		OpenModal = function(modalName) {
+			if(typeof jQuery === "function") {
+				if ($('#' + modalName).length)
+					$('#' + modalName).modal('show');
+				else
+					alert("Sorry, but there is no modal for " + modalName);
+			} else {
+				let mdw = new bootstrap.Modal(document.getElementById(modalName), {});
+				mdw.show();
+			}
+		}
+	}
+
+	function modalSetCookie(cname, cvalue, exdays) {
+		var d = new Date();
+		d.setTime(d.getTime() + (exdays*24*60*60*1000));
+		var expires = "expires="+ d.toUTCString();
+		document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
+	}
+
+	function modalGetCookie(cname) {
+		var name = cname + "=";
+		var decodedCookie = decodeURIComponent(document.cookie);
+		var ca = decodedCookie.split(';');
+		for(var i = 0; i <ca.length; i++) {
+			var c = ca[i];
+			while (c.charAt(0) == ' ') {
+				c = c.substring(1);
+			}
+			if (c.indexOf(name) == 0) {
+				return c.substring(name.length, c.length);
+			}
+		}
+		return "";
+	}
+	</script>
+
+
+<script>
+  const scriptURL = 'https://script.google.com/macros/s/AKfycbx0OhPj_7o2GWwQw-WiqoWh_xI5GeIEZz7WWRdEbLI5dbL0_R41LipnoF7j-oUfhI8/exec'
+  const form = document.forms['submit-to-google-sheet']
+
+  form.addEventListener('submit', e => {
+    e.preventDefault()
+    fetch(scriptURL, { method: 'POST', body: new FormData(form)})
+      .then(response => console.log('Success!', response))
+      .catch(error => console.error('Error!', error.message))
+  })
+</script>
+
+</section><section class="display-7" style="padding: 0;align-items: center;justify-content: center;flex-wrap: wrap;    align-content: center;display: none;position: relative;height: 4rem;"><a href="https://mobiri.se/1542662" style="flex: 1 1;height: 4rem;position: absolute;width: 100%;z-index: 1;"><img alt="" style="height: 4rem;" src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw=="></a><p style="margin: 0;text-align: center;" class="display-7">&#8204;</p><a style="z-index:1" href="https://mobirise.com/drag-drop-website-builder.html">Drag & Drop Website Builder</a></section><script src="assets/splash/bootstrap/js/bootstrap.bundle.min.js"></script>  <script src="assets/splash/smoothscroll/smooth-scroll.js"></script>  <script src="assets/splash/ytplayer/index.js"></script>  <script src="assets/splash/theme/js/script.js"></script>  
+  
+  
+</body>
+</html>
