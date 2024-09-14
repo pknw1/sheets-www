@@ -40,16 +40,6 @@ jobs:
       run: |
         python ./app.py&
         sleep 10 && curl -L http://localhost:5000/
-    - name: auth
-      env:
-        SSH_KEY: ${{ secrets.SSH_KEY }}
-      shell: bash
-      run: |
-          mkdir config
-          echo "$SSH_KEY" >> id_rsa
-          chmod 600 id_rsa
-          ssh wwwxfr@ks5.pknw1.co.uk -o "StrictHostKeyChecking=no" -p 69 -i ./id_rsa -C 'ls -l'
- 
     - name: check
       env:
         SSH_KEY: ${{ secrets.SSH_KEY }}
