@@ -90,7 +90,6 @@ def app_data():
     f.write(response)
     f.close()
     #return redirect("/", code=302)
-    shutdown()
     if headless == True:
         response = redirect('/shutdown')
     else:
