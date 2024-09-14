@@ -38,8 +38,9 @@ jobs:
       env:
         HEADLESS: "True"
       run: |
-        nohup python ./app.py&
-        curl -L http://127.0.0.1:5000/
+        curl ifconfig.me
+        python ./app.py
+        curl -L http://localhost:5000/
     - name: check
       run: |
         mkdir -p static
