@@ -42,7 +42,17 @@ jobs:
         curl -L http://127.0.0.1:5000/
     - name: check
       run: |
-        ls -l web/templates/rendered/
+        mkdir -p static
+        cp -R web/static/assets static/
+        cp web/templates/rendered/* static/
+        cd static
+        tar -zcvf ../static.tgz *
+    - name: Archive
+      uses: actions/upload-artifact@v4
+      with:
+        name: static
+        path: static.tgz
+
 
 
 
