@@ -7,6 +7,13 @@ import sys
 import webbrowser
 from datetime import datetime
 import glob
+import requests
+from pushbullet import API
+
+api = API()
+
+access_token = os.environ['pushbullet_access_token']
+api.set_token(access_token)
 
 client = pygsheets.authorize(service_file='config/auth.json')
 
@@ -28,8 +35,32 @@ home = document.worksheet('title','Config')
 #template = document.worksheet('title','Shows')
 #music_src = document.worksheet('title','Music')
 
+def ntfy(topic=None,message=None):
+    if message==None:
+        message="No Message"
+    if topic==None:
+        topic="DeannaJadeWWWalerts"
+    match topic:
+        case "alert":
+            topic="DeannaJadeWWWalerts"
+        case "system":
+            topic="DeannaJadeWWWsystem"
+        case _:
+            topic="DeannaJadeWWWalerts"
+    
+    url = 'https://ntfy.sh/'+topic
+    x = requests.post(url, data=message.encode(encoding='utf-8') )
+    return topic+" - logged "+message
+
+@app.route('/ntfy/<message>')
+def send_ntfy(message=None):
+    response = ntfy(message)
+    return response
+
+
 @app.route('/cc')
 def rm_files():
+    ntfy("system","Cache Cleaner Started")
     files=glob.glob("web/templates/rendered/*")
     for f in files:
         try:
@@ -167,8 +198,12 @@ def config():
     file_path="web/templates/rendered/home.html"
     with open(file_path, 'w') as file:
         file.write(response)
+    ntfy("system","home template rendered")
+
 
     if headless == "42":
+        ntfy("system","Headless Render Content Started")
+
         f = open("web/templates/rendered/index.html", "w")
         f.write(response)
         f.close()
@@ -180,6 +215,8 @@ def config():
 
 @app.route('/shutdown', methods=['GET','POST'])
 def shutdown():
+    ntfy("system","Shutdown Initiated")
+
     pid = os.getpid()
     print(pid)
     #sys.exit(0)
@@ -229,8 +266,11 @@ def app_cd():
     data_source = home.range('D23:F27')
     raw_data = []
     for row in data_source:
-        if row[0] != '':
-            social_list.append(row)
+        try:
+            if row[0] != '':
+                social_list.append(row)
+        except:
+            print("error")
 
     response = render_template('components/base.html')
     if  home.cell('B9').value == 'Enabled':
