@@ -43,19 +43,15 @@ jobs:
         python ./app.py&
         sleep 10 && curl -L http://localhost:5000/ 
 
-    - name: Parse
-      run: |
-        echo $(pwd)
-         find . -type f -iname '*html'
-
     - name: Package
       run: |
         if ! [ -d static ]; then mkdir -p static/assets; fi
         cp -R web/static/assets/* static/assets/
-        cp web/static/*.html static/
-        echo $(date) > static/ver.html
+        cp web/templates/rendered/*.html static/
         if ! [ -d static/parsed ]; then mkdir static/parsed; fi
         cp static/*html static/parsed/
+        echo $(date) > static/ver.html
+
 
     - name: setup SSH
       env:
