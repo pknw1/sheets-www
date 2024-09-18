@@ -1,0 +1,55 @@
+
+<section data-bs-version="5.1" class="contacts01 cid-uooB2v5YWF" id="SETLIST">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-12 content-head">
+                <div class="mbr-section-head mb-5">
+                    <h3 class="mbr-section-title mbr-fonts-style align-center mb-0 display-2">
+                        <strong>{{ page_data['title'] }}</strong></h3>
+                    <h4 class="mbr-section-subtitle mbr-fonts-style align-center mb-0 mt-4 display-7">
+			    {{ page_data['subtitle'] }}
+                    </h4>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+		{% for track in data %} 
+            <div class="item features-without-image col-12 col-md-4 active">
+                <div class="item-wrapper">
+                    <div class="text-wrapper">
+                        <h6 class="card-title mbr-fonts-style mb-3 display-5">
+				<strong>{{track[2]}}</strong> ({{ track[3] }})
+                        </h6>
+			{% if track[1] == 'Set List' %}
+                        <p class="mbr-text mbr-fonts-style display-7">
+			in current set 
+			</p>
+			{% endif %}
+			{% if track[5] != '' %}
+			<img src="{{ track[5] }}" />
+			{%endif %}
+<br>
+
+                        <p class="mbr-text mbr-fonts-style display-7">
+			{{ track[4] }}
+
+			<br>
+			<p> Download Options</p>
+                        {% if track[7] != '' %}<a href="{{ track[7]}}" target="_blank"><span class="mbr-iconfont mobi-mbri-download-2 mobi-mbri"></span></a>{% endif %}
+			{% if track[8] != '' %}<a href="{{ track[8]}}" target="_blank"><span class="mbr-iconfont socicon-youtube socicon"></span></a>{% endif %}
+			{% if track[9] != '' %} <a href="{{ track[9]}}" target="_blank"><span class="mbr-iconfont socicon-spotify socicon"></span></a>{% endif %}
+                        {% if track[10] != '' %} <a href="{{ track[10]}}" target="_blank"><span class="mbr-iconfont socicon-soundcloud socicon"></span></a>{% endif %}
+                        {% if track[11] != '' %} <a href="{{ track[11]}}" target="_blank"><span class="mbr-iconfont socicon-itunes socicon"></span></a>{% endif %}
+                        {% if track[12] != '' %} <a href="{{ track[12]}}" target="_blank"><span class="mbr-iconfont socicon-tiktok socicon"></span></a>{% endif %}
+
+
+
+                        </p>
+                    </div>
+                </div>
+            </div>
+	    {% endfor %}
+
+        </div>
+    </div>
+</section>

@@ -1,0 +1,83 @@
+
+<section data-bs-version="5.1" class="form5 cid-uooCk7l0Fj" id="CONTACTFORM">
+    
+    
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-12 content-head">
+                <div class="mbr-section-head mb-5">
+                    <h3 class="mbr-section-title mbr-fonts-style align-center mb-0 display-2">
+                        <strong>{{ page_data['title'] }}</strong></h3>
+                    <h4 class="mbr-section-subtitle mbr-fonts-style align-center mb-0 mt-4 display-7">
+		{{ page_data['subtitle'] }}
+                    </h4>
+                </div>
+            </div>
+        </div>
+        <div class="row justify-content-center">
+            <div class="col-lg-8 mx-auto mbr-form" data-form-type="formoid">
+	<form name="submit-to-google-sheet">
+                    <div class="row">
+                        <div hidden="hidden" data-form-alert="" class="alert alert-success col-12">Thanks for filling out the form!</div>
+                        <div hidden="hidden" data-form-alert-danger="" class="alert alert-danger col-12">
+                            Oops...! some problem!
+                        </div>
+                    </div>
+                    <div class="dragArea row">
+                        <div class="col-12 form-group mb-3" data-for="type">
+
+			  <select required name="type" id="type" data-form-field="type" class="form-control">
+    <option value="">--- Please Select Your Query Type ---</option>
+    <option value="newsletter">Signup to Newsletter</option>
+    <option value="testimonial">Leave a Testimonial</option>
+    <option value="booking">Booking Query</option>
+    <option value="feedback">Feedback</option>
+    <option value="other">Other Query</option>
+  </select>
+			</div>
+			</div>
+
+                        <div class="col-md col-sm-12 form-group mb-3" data-for="name">
+                            <input required type="text" name="name" placeholder="Name" data-form-field="name" class="form-control" value="" id="name-CONTACTFORM">
+                        </div>
+                        <div class="col-md col-sm-12 form-group mb-3" data-for="email">
+                            <input required type="email" name="email" placeholder="E-mail" data-form-field="email" class="form-control" value="" id="email-CONTACTFORM">
+                        </div>
+                        <div class="col-12 form-group mb-3" data-for="phone">
+                            <input type="tel" name="phone" placeholder="Phone" data-form-field="phone" class="form-control" value="" id="phone-CONTACTFORM">
+                        </div>
+                        <div class="col-12 form-group mb-3" data-for="textarea">
+                            <textarea name="textarea" placeholder="Message" data-form-field="textarea" class="form-control" id="textarea-CONTACTFORM"></textarea>
+                        </div>
+ <div class="col-md col-sm-12 form-group mb-3" data-for="timescale">
+<select required name="timescale" id="timescale" data-form-field="timescale" class="form-control">
+    <option value="">--- How urgently would you like us to respond? ---</option>
+    <option value="asap">ASAP</option>
+    <option value="other">3 - 5 Business Days</option>
+  </select>
+
+                        </div>
+
+                        <div class="col-lg-12 col-md-12 col-sm-12 align-center mbr-section-btn"><button type="submit" class="btn btn-success-outline display-7">Send message</button></div>
+			  <button type="submit">Send</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<script>
+  const scriptURL = 'https://script.google.com/macros/s/AKfycbzN6nydskTxLvmEXW2QE9P6BNhmSPKwVR2T7Bk4KcNHB4exuLERN0XUMk3Gm1hI5COa/exec'
+  const form = document.forms['submit-to-google-sheet']
+
+  form.addEventListener('submit', e => {
+    e.preventDefault()
+    fetch(scriptURL, { method: 'POST', body: new FormData(form)})
+      .then(response => console.log('Success!', response))
+      .catch(error => console.error('Error!', error.message))
+  })
+</script>
+
+

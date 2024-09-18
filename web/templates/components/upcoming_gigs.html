@@ -1,0 +1,70 @@
+
+<section data-bs-version="5.1" class="article11 cid-uoozLMdtiw" id="UPCOMINGTITLE">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="title col-md-12 col-lg-10">
+                <h3 class="mbr-section-title mbr-fonts-style align-center mt-0 mb-0 display-2">
+                <strong>{{ page_data['title'] }}</strong></h3>
+                <h4 class="mbr-section-subtitle align-center mbr-fonts-style mt-4 display-7">
+		{{ page_data['subtitle'] }}
+                </h4>
+                
+            </div>
+        </div>
+    </div>
+</section>
+
+<section data-bs-version="5.1" class="mbr-section article content1 cid-6tovdgqrYK" id="UPCOMINGEVENTS">
+			<div class="container">
+				<div class="row">
+					<div class="col-md-12">
+						{% for gig in data %}
+						<div class="mu-about-area">
+							<!-- Start Feature Content -->
+							<div class="row">
+								<div class="col-md-6">
+									<div class="mu-about-left">
+										<!--<img class="" src="assets/images/logo-600x191.png" alt="img">
+										-->
+										{% if gig[7] != '' %}
+<a href="{{gig[7]}}" target="_new"> <img class="" src="{{ gig[5]}}" style="height:300 px; width: auto;" alt="img"></a>
+										{% else %}
+										<img class="" src="{{ gig[5]}}" style="height:300 px; width: auto;" alt="img">
+										{% endif %}
+									</div>
+								</div>
+								<div class="col-md-6">
+									<div class="mu-about-right">
+										<h2 class="mbr-section-subtitle align-center mbr-light mbr-fonts-style display-5">{{ gig[3] }} @ 
+{% if gig[9] != '' %}
+                        <a href="{{gig[9]}}" target="_new">{{gig[8]}}</a>
+                        {% else %}
+                        {{ gig[8] }}
+                        {% endif %}
+				</h2>
+										<p class="align-center mbr-fonts-style display-5">
+
+{% if gig[10] != "" %} Doors {{ gig[10] }} </span>{% endif %}
+{% if gig[11] != "" %} On Stage {{ gig[11] }} </span>{% endif %}
+<br> Tickets: 
+{% if gig[14] != "" %} Advanced {{ gig[14] }} </span>{% endif %}
+{% if gig[15] != "" %} On Door {{ gig[15] }} </span>{% endif %}
+<br>
+{% if gig[16] != "" %} info: {{ gig[16] }} </span>{% endif %}
+<br>
+{% if gig[17] != "" %} {{ gig[17] }} </span>{% endif %}
+
+
+										</p>
+									           
+									</div>
+								</div>
+							</div>
+							<!-- End Feature Content -->
+
+						</div>
+						{% endfor  %}
+					</div>
+				</div>
+			</div>
+</section>

@@ -112,7 +112,7 @@
                         Enter your email address to receive our email newsletter
                         </p>
                                 <div class="text-wrapper align-left">
-       <form name="submit-to-google-sheet">
+       <form name="submit-newsletter-to-google-sheet">
         <input name="type" type="string" value="newsletter" hidden>
 
         <div class="row">
@@ -590,7 +590,7 @@ document.addEventListener("DOMContentLoaded", function() {
   
 <script>
   const scriptURL = 'https://script.google.com/macros/s/AKfycbx0OhPj_7o2GWwQw-WiqoWh_xI5GeIEZz7WWRdEbLI5dbL0_R41LipnoF7j-oUfhI8/exec'
-  const form = document.forms['submit-to-google-sheet']
+  const form = document.forms['submit-newsletter-to-google-sheet']
 
   form.addEventListener('submit', e => {
     e.preventDefault()

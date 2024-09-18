@@ -1,0 +1,45 @@
+
+<section data-bs-version="5.1" class="article11 cid-uoows5xOdz" id="PREVIOUSGIGSTITLE">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="title col-md-12 col-lg-10">
+                <h3 class="mbr-section-title mbr-fonts-style align-center mt-0 mb-0 display-2">
+                <strong>{{ page_data['title'] }}</strong></h3>
+                <h4 class="mbr-section-subtitle align-center mbr-fonts-style mt-4 display-7">
+			{{ page_data['subtitle'] }}
+                </h4>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section data-bs-version="5.1" class="mbr-section article content1 cid-FhC1vfj1N8" id="PREVIOUSGIGS">
+        {% for gig in data %}
+
+<div class="flex-container">
+	<div class="col col--img">
+		{% if gig[5] != '' %}
+		<img src="{{ gig[5] }}" />
+		{% else %}
+		<img src="assets/images/logo-600x191.png" alt="">
+		{% endif %}
+	</div>
+	<div class="col col--text">
+		<h4 class="mbr-section-subtitle align-center mbr-light mbr-fonts-style display-2">{{gig[3]}} <br> 
+			{% if gig[9] != '' %}
+			<a href="{{gig[9]}}" target="_new">{{gig[8]}}</a>
+			{% else %}
+			{{ gig[8] }}
+			{% endif %}
+		</h4>
+		<p class="align-center mbr-fonts-style display-7">
+		{{ gig[1] }} - {{ gig[2] }} @ {{ gig[8] }}<br>
+		{% if gig[13] != '' %}
+		Set List: <a href="#SETLIST">{{ gig[13] }}</a>
+		{% endif %}
+		<br><br></p>
+           
+	</div>
+</div>
+{% endfor %}
+</section>

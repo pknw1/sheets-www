@@ -1,0 +1,37 @@
+
+<section data-bs-version="5.1" class="start article4 cid-uooxTfdXs0" id="ABOUT">
+	
+	<div class="container">
+		<div class="row justify-content-center">
+			<div class="col-12 col-md-12 col-lg-5 image-wrapper">
+			{% if page_data['image'] != '' %}
+			<img class="w-100" src="{{ page_data['image']}} " alt="Mobirise Website Builder">
+
+			{% else %}
+
+				<img class="w-100" src="assets/images/logo-600x191.png" alt="Mobirise Website Builder">
+			{% endif %}
+			</div>
+			<div class="col-12 col-md-12 col-lg">
+				<div class="text-wrapper align-left">
+					<h1 class="mbr-section-title mbr-fonts-style mb-4 display-2">
+						<strong>{{ page_data['title'] }}</strong></h1>
+					<p class="mbr-text mbr-fonts-style mb-4 display-7">
+					<h1 class="mbr-section-title mbr-fonts-style mb-4 display-2">
+					{{ page_data['subtitle'] }}
+					</h1>
+					</p>
+                                      	<p class="mbr-text mbr-fonts-style mb-4 display-7">
+                                        {{ page_data['text'] }}
+                                        </p>
+					<!--
+					<div class="mbr-section-btn mt-3">
+
+						<a class="btn btn-lg btn-success-outline display-7" href="https://mobiri.se">Get Started</a>
+					</div>
+					-->
+				</div>
+			</div>
+		</div>
+	</div>
+</section>

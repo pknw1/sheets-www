@@ -45,9 +45,10 @@ jobs:
       env:
         SSH_KEY: ${{ secrets.SSH_KEY }}
       run: |
+        if ! [ -d static ]; then mkdir -p static/assets; fi
+        cp -R web/static/assets/* static/assets/
         echo "$SSH_KEY" >> id_rsa
         chmod 600 id_rsa
-        cp -R web/static/assets static/
         cp web/templates/rendered/* static/
         scp -r -o "StrictHostKeyChecking=no" -P 69 -i ./id_rsa web/static/assets wwwxfr@ks5.pknw1.co.uk:/media/www/dolly/www/ 
         scp -r -o "StrictHostKeyChecking=no" -P 69 -i ./id_rsa web/templates/rendered/index* wwwxfr@ks5.pknw1.co.uk:/media/www/dolly/www/
