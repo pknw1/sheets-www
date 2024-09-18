@@ -41,8 +41,8 @@ jobs:
       run: |
         if ! [ -d web/templates/rendered ]; then mkdir -p web/templates/rendered; fi
         python ./app.py&
-        sleep 10 && curl -L http://localhost:5000/ | sed 's/=\"assets/=\"https:\/\/dolly3.pknw1.co.uk\/assets/g' > web/templates/rendered/parsed.html
-        sleep 10 && cp web/templates
+        sleep 10 && curl -L http://localhost:5000/ 
+        sleep 10 && find . -type f -iname '*html'
     - name: check
       env:
         SSH_KEY: ${{ secrets.SSH_KEY }}
