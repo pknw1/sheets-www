@@ -135,7 +135,7 @@ def config():
                                 raw_data.append(menu)
                         except:
                             print("no")
-                    page = {'name': i[0].value, 'title': i[2].value, 'subtitle': i[3].value, 'text': i[4].value, "data": raw_data }
+                    page = {'name': i[0].value, 'title': i[2].value, 'subtitle': i[3].value, 'text': i[4].value, 'image': i[5].value, "data": raw_data }
 
                 case _:
                     page = {'name': i[0].value, 'title': i[2].value, 'subtitle': i[3].value, 'text': i[4].value, 'image': i[5].value }
