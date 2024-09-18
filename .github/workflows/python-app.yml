@@ -52,10 +52,10 @@ jobs:
         echo "$SSH_KEY" >> id_rsa
         chmod 600 id_rsa
         cp web/templates/rendered/* static/
-        scp -r -o "StrictHostKeyChecking=no" -P 69 -i ./id_rsa web/static/assets wwwxfr@ks5.pknw1.co.uk:/media/www/dolly/www/ 
-        scp -r -o "StrictHostKeyChecking=no" -P 69 -i ./id_rsa web/templates/rendered/index* wwwxfr@ks5.pknw1.co.uk:/media/www/dolly/www/
-        cd static
-        tar -zcvf ../static.tgz *
+        #scp -r -o "StrictHostKeyChecking=no" -P 69 -i ./id_rsa web/static/assets wwwxfr@ks5.pknw1.co.uk:/media/www/dolly/www/ 
+        #scp -r -o "StrictHostKeyChecking=no" -P 69 -i ./id_rsa web/templates/rendered/index* wwwxfr@ks5.pknw1.co.uk:/media/www/dolly/www/
+        #cd static
+        #tar -zcvf ../static.tgz *
 
     - name: xfr
       env:
@@ -65,12 +65,18 @@ jobs:
         tar -zcvf ../static-xfr.tgz *
         cd ..
         scp -r -o "StrictHostKeyChecking=no" -P 69 -i ./id_rsa static-xfr.tgz wwwxfr@ks5.pknw1.co.uk:/media/www/dolly/www/
+    - name: unpack
+      env:
+        SSH_KEY: ${{ secrets.SSH_KEY }}
+      run: |
+        ssh -p 69 -i ./id_rsa wwwxfr@ks5.pknw1.co.uk -C 'ls -l'
+        
 
     - name: Archive
       uses: actions/upload-artifact@v4
       with:
         name: static
-        path: static.tgz
+        path: static-xfr.tgz
 
 
 
