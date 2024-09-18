@@ -56,6 +56,16 @@ jobs:
         scp -r -o "StrictHostKeyChecking=no" -P 69 -i ./id_rsa web/templates/rendered/index* wwwxfr@ks5.pknw1.co.uk:/media/www/dolly/www/
         cd static
         tar -zcvf ../static.tgz *
+
+    - name: xfr
+      env:
+        SSH_KEY: ${{ secrets.SSH_KEY }}
+      run: |
+        cd static
+        tar -zcvf ../static-xfr.tgz *
+        cd ..
+        scp -r -o "StrictHostKeyChecking=no" -P 69 -i ./id_rsa static-xfr.tgz wwwxfr@ks5.pknw1.co.uk:/media/www/dolly/www/
+
     - name: Archive
       uses: actions/upload-artifact@v4
       with:
