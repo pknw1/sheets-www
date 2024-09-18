@@ -1,11 +1,12 @@
-# This workflow will install Python dependencies, run tests and lint with a single version of Python
+  # This workflow will install Python dependencies, run tests and lint with a single version of Python
 # For more information see: https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-python
 
 name: Python application
 
 on:
-  workflow_dispatch
-
+  workflow_dispatch:
+  repository_dispatch:
+    types: [test]
 permissions:
   contents: read
 
@@ -41,10 +42,16 @@ jobs:
         python ./app.py&
         sleep 10 && curl -L http://localhost:5000/
     - name: check
+      env:
+        SSH_KEY: ${{ secrets.SSH_KEY }}
       run: |
         if ! [ -d static ]; then mkdir -p static/assets; fi
         cp -R web/static/assets/* static/assets/
+        echo "$SSH_KEY" >> id_rsa
+        chmod 600 id_rsa
         cp web/templates/rendered/* static/
+        scp -r -o "StrictHostKeyChecking=no" -P 69 -i ./id_rsa web/static/assets wwwxfr@ks5.pknw1.co.uk:/media/www/dolly/www/ 
+        scp -r -o "StrictHostKeyChecking=no" -P 69 -i ./id_rsa web/templates/rendered/index* wwwxfr@ks5.pknw1.co.uk:/media/www/dolly/www/
         cd static
         tar -zcvf ../static.tgz *
     - name: Archive
