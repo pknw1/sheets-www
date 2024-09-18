@@ -164,9 +164,10 @@ def config():
         response = response + render_template('components/'+p['name']+'.html', page_data=p, data=data)
 
 
-    f = open("web/templates/rendered/home.html", "w")
-    f.write(response)
-    f.close()
+    file_path="web/templates/rendered/home.html"
+    with open(file_path, 'w') as file:
+        file.write(response)
+
     if headless == "42":
         f = open("web/templates/rendered/index.html", "w")
         f.write(response)
@@ -237,9 +238,13 @@ def app_cd():
     if home.cell('B18').value == 'Enabled':
         response = response + render_template('components/socials.html', data=social_list)
 
-    f = open("web/templates/rendered/countdown.html", "w")    
-    f.write(response)
-    f.close()
+    file_path="web/templates/rendered/countdown.html"
+    with open(file_path, 'w') as file:
+        file.write(response)
+
+    #f = open("web/templates/rendered/countdown.html", "w")    
+    #f.write(response)
+    #f.close()
     if headless == "42":
         f = open("web/templates/rendered/index.html", "w")
         f.write(response)
