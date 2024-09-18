@@ -111,11 +111,11 @@ def config():
 
 
                 case "socials":
-                    data_source = document.worksheet('title','Data[Media]')
+                    data_source = home.range('D23:F27')
                     raw_data = []
                     for row in data_source:
                         try:
-                            if row[1] == 'Social':
+                            if row[0] != '':
                                 raw_data.append(row)
                         except:
                             print("no")
@@ -225,10 +225,13 @@ def app_cd():
     media_source = document.worksheet('title','Data[Media]')
 
     social_list = []
-    for row in media_source:
-        print(row)
-        if row[1] == 'Social':
+                    
+    data_source = home.range('D23:F27')
+    raw_data = []
+    for row in data_source:
+        if row[0] != '':
             social_list.append(row)
+
     response = render_template('components/base.html')
     if  home.cell('B9').value == 'Enabled':
         response = response + render_template('components/nav.html', page_data=page_data)
