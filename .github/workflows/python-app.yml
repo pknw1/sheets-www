@@ -48,6 +48,7 @@ jobs:
       run: |
         if ! [ -d static ]; then mkdir -p static/assets; fi
         cp -R web/static/assets/* static/assets/
+        echo $(date) > static/ver
         echo "$SSH_KEY" >> id_rsa
         chmod 600 id_rsa
         cp web/templates/rendered/* static/
