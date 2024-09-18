@@ -39,6 +39,7 @@ jobs:
       env:
         HEADLESS: "True"
       run: |
+        if ! [ -d web/templates/rendered ]; then mkdir -p web/templates/rendered; fi
         python ./app.py&
         sleep 10 && curl -L http://localhost:5000/
     - name: check
