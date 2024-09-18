@@ -1,0 +1,21 @@
+
+<section data-bs-version="5.1" class="social05 cid-uooGqLeB0m" id="SOCIAL">
+    <div class="container">
+        <div class="row">
+            
+            <div class="col-12">
+                <div class="social-row">
+			{% for site in data %}
+                    <div class="soc-item">
+			    <a href="{{ site[7]}}" target="_blank">
+				    <span class="{{ site[4] }}"></span>
+                        </a>
+                    </div>
+		    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+

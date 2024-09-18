@@ -1,0 +1,33 @@
+  <!--<link rel="preload" as="style" href="assets/mobirise/css/mbr-additional2.css?v=s1Sz2E"><link rel="stylesheet" href="assets/mobirise/css/mbr-additional2.css?v=s1Sz2E" type="text/css">
+  -->
+ <section data-bs-version="5.1" class="menu menu1 cid-uoAtCuujOX" once="menu" id="menu01-1c">
+	
+
+	<nav class="navbar navbar-dropdown navbar-fixed-top navbar-expand-lg">
+		<div class="container">
+			<div class="navbar-brand">
+				<span class="navbar-logo">
+					<a href="https://mobiri.se">
+						<img src="assets/images/logo.png" alt="Mobirise Website Builder" style="height: 3rem;">
+					</a>
+				</span>
+				<span class="navbar-caption-wrap"><a class="navbar-caption text-black display-4" href="https://mobiri.se">Mobirise</a></span>
+			</div>
+			<button class="navbar-toggler" type="button" data-toggle="collapse" data-bs-toggle="collapse" data-target="#navbarSupportedContent" data-bs-target="#navbarSupportedContent" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+				<div class="hamburger">
+					<span></span>
+					<span></span>
+					<span></span>
+					<span></span>
+				</div>
+			</button>
+			<div class="collapse navbar-collapse" id="navbarSupportedContent">
+				<ul class="navbar-nav nav-dropdown nav-right" data-app-modern-menu="true"><li class="nav-item dropdown">
+						<a class="nav-link link dropdown-toggle text-success display-4" href="https://mobiri.se" data-toggle="dropdown-submenu" data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-expanded="false">About</a><div class="dropdown-menu" aria-labelledby="dropdown-210"><a class="dropdown-item text-success display-4" href="https://mobiri.se">sub1</a><div class="dropdown"><a class="dropdown-item dropdown-toggle text-success display-4" href="https://mobiri.se" data-toggle="dropdown-submenu" data-bs-toggle="dropdown" data-bs-auto-close="outside">sub2</a><div class="dropdown-menu dropdown-submenu" data-bs-popper="none" aria-labelledby="dropdown-518"><a class="dropdown-item text-success display-4" href="https://mobiri.se">ss1</a><a class="dropdown-item text-success display-4" href="https://mobiri.se">ss2</a></div></div></div>
+					</li></ul>
+				
+				
+			</div>
+		</div>
+	</nav>
+</section>

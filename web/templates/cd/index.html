@@ -52,26 +52,16 @@
                 </p>
                 <div class="icons-menu row justify-content-center display-7">
                     
+                {% for site in social %}
+		 <div class="soc-item col-auto">
+			 <a href="{{ site['link']}}" target="_blank" class="social__link">
+				<span class="{{ site['icon']}}"></span>
+                        </a>
+                    </div>
+		 {% endfor %}
                     
                     
-                    
-                <div class="soc-item col-auto">
-                        <a href="https://instagram.com/mobirise" target="_blank" class="social__link">
-                            <span class="mbr-iconfont socicon-instagram socicon"></span>
-                        </a>
-                    </div><div class="soc-item col-auto">
-                        <a href="https://twitter.com/mobirise" target="_blank" class="social__link">
-                            <span class="mbr-iconfont socicon-twitter socicon"></span>
-                        </a>
-                    </div><div class="soc-item col-auto">
-                        <a href="https://facebook.com/Mobirise/" target="_blank" class="social__link">
-                            <span class="mbr-iconfont socicon socicon-facebook"></span>
-                        </a>
-                    </div><div class="soc-item col-auto">
-                        <a href="https://youtube.com/c/mobirise" target="_blank" class="social__link">
-                            <span class="mbr-iconfont socicon socicon-youtube"></span>
-                        </a>
-                    </div></div>
+		</div>
                 
             </div>
         </div>

@@ -1,0 +1,59 @@
+
+<section data-bs-version="5.1" class="header2 cid-uootnI2ssB" id="NEWSLETTER">
+  
+  <div class="container">
+    <div class="row content-wrapper justify-content-center">
+      <div class="col-lg-8 mbr-form">
+        <div class="">
+          
+        </div>
+
+        <div class="text-wrapper align-left" data-form-type="formoid">
+<form name="submit-to-google-sheet">
+
+
+            <div class="row">
+              <div hidden="hidden" data-form-alert="" class="alert alert-success col-12">Thanks for filling out the form!</div>
+              <div hidden="hidden" data-form-alert-danger="" class="alert alert-danger col-12">
+                Oops...! some problem!
+              </div>
+            </div>
+            <div class="dragArea row">
+              <div data-for="email" class="col-lg-6 col-md-6 col-sm-12 form-group">
+ <input type="text" name="type" data-form-field="type" class="form-control display-7" value="newsletter" id="type-NEWSLETTER" hidden>
+		      <input type="text" name="name" placeholder="name" data-form-field="name" class="form-control display-7" value="" id="name-NEWSLETTER">
+                <input type="email" name="email" placeholder="test@email.com" data-form-field="email" class="form-control display-7" value="" id="email-NEWSLETTER">
+		<textarea name="query" rows="10" cols="30" data-form-field="query" class="form-control display-7" value="" id="query-NEWSLETTER"></textarea>
+              </div>
+
+	        <input type="text" id="tel" name="tel" placeholder="tel"><br>
+		<label for="timescale">Choose a timescale:</label>
+  <select id="time" name="time">
+    <option value="asap">ASAP</option>
+    <option value="weeks">2/3 Weeks</option>
+    <option value="other">Other</option>
+  </select>
+
+              <div class="col-auto mbr-section-btn"><button type="submit" class="w-100 w-100 w-100 w-100 w-100 w-100 btn btn-secondary display-7">Submit</button></div>
+	        <button type="submit">Send</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  const scriptURL = 'https://script.google.com/macros/s/AKfycbzN6nydskTxLvmEXW2QE9P6BNhmSPKwVR2T7Bk4KcNHB4exuLERN0XUMk3Gm1hI5COa/exec'
+  const form = document.forms['submit-to-google-sheet']
+
+  form.addEventListener('submit', e => {
+    e.preventDefault()
+    fetch(scriptURL, { method: 'POST', body: new FormData(form)})
+      .then(response => console.log('Success!', response))
+      .catch(error => console.error('Error!', error.message))
+  })
+</script>
+~
+~

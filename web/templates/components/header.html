@@ -1,0 +1,28 @@
+<section data-bs-version="5.1" class="start article2 cid-uoor04lwOB mbr-fullscreen" id="HEADER">
+	<div class="container">
+		<div class="row justify-content-center">
+			<div class="col-12 col-md-12 col-lg-5 image-wrapper">
+			<!--	<img class="w-100" src="assets/images/logo-600x191.png" alt="Mobirise Website Builder">
+			-->
+			</div>
+			<div class="col-12 col-md-12 col-lg">
+				<div class="text-wrapper align-left">
+					<h1 class="mbr-section-title mbr-fonts-style mb-4 display-2">
+						<strong>{{ page_data['title'] }}</strong></h1>
+                                                <h1 class="mbr-section-title mbr-fonts-style mb-4 display-2"><strong>{{ page_data['subtitle'] }}</strong></h1>
+						{% if page_data['image'] != '' %}
+						<img class="w-50" src="{{ page_data['image']}}" alt="Mobirise Website Builder">
+
+						{% else %}
+                                <img class="w-50" src="assets/images/logo-600x191.png" alt="Mobirise Website Builder">
+				{% endif %}
+				<br>
+					<p class="mbr-text align-left mbr-fonts-style mb-4 display-7">
+					{{ page_data['text'] }}
+					</p>
+					<div class="mbr-section-btn align-left mt-3"><a class="btn btn-success-outline display-7" href="#ABOUT">Get started</a></div>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>

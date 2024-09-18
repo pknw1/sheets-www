@@ -5,9 +5,17 @@ import os
 import signal
 import sys
 import webbrowser
+from datetime import datetime
+import glob
 
 client = pygsheets.authorize(service_file='config/auth.json')
-headless = os.environ['HEADLESS']
+
+try:
+    headless = os.environ['HEADLESS']
+except:
+    headless = True
+
+
 
 app = Flask(__name__,
         static_url_path='/assets',
@@ -15,85 +23,167 @@ app = Flask(__name__,
         template_folder='web/templates')
 
 
-document = client.open_by_key('1QwxkEjg66O5tlfEDphjhjQmchkzXHLdzm9IWP4uh6us')
-home = document.worksheet('title','H2')
-template = document.worksheet('title','Shows')
-music_src = document.worksheet('title','Music')
+document = client.open_by_key('1XPlTkHDci5QfDd6K_2Cu61GujArrr7FNJgY4Zb6avEU')
+home = document.worksheet('title','Config')
+#template = document.worksheet('title','Shows')
+#music_src = document.worksheet('title','Music')
 
-def shutdown_flask(self):
-    from win32api import GenerateConsoleCtrlEvent
-    CTRL_C_EVENT = 0
-    GenerateConsoleCtrlEvent(CTRL_C_EVENT, 0)
+@app.route('/cc')
+def rm_files():
+    files=glob.glob("web/templates/rendered/*")
+    for f in files:
+        try:
+            os.remove(f)
+        except OSError as e:
+            print("Error: %s - %s." % (e.filename, e.strerror))
+    return redirect('/')
+
+@app.route('/home')
+@app.route('/config')
+def config():
+    data = home.range("A9:F19")
+    site_title = home.cell('B2').value
+    page_data=[]
+    for i in data:
+        if i[1].value == 'Enabled':
+            match i[0].value:
+                case "upcoming_gigs":
+                    events_source = document.worksheet('title','Data[Events]')
+                    raw_data = []
+                    for row in events_source:
+                        try:
+                            if row[0] != 'ID':
+                                checktime = str(row[3]) 
+                                past = datetime.strptime(checktime, "%d/%m/%Y")
+                                present = datetime.now()
+                                if past.date() < present.date():
+                                    print("old")
+                                else:
+                                    raw_data.append(row)
+                        except:
+                            print("no")
+                    page = {'name': i[0].value, 'title': i[2].value, 'subtitle': i[3].value, 'text': i[4].value, "data": raw_data }
+
+                case "previous_gigs":
+                    events_source = document.worksheet('title','Data[Events]')
+                    raw_data = []
+                    for row in events_source:
+                        try:
+                            if row[0] != 'ID':
+                                checktime = str(row[3])
+                                print(checktime)
+                                past = datetime.strptime(checktime, "%d/%m/%Y")
+                                present = datetime.now()
+                                if past.date() > present.date():
+                                    print("new")
+                                else:
+                                    raw_data.append(row)
+                        except:
+                            print("no")
+                    page = {'name': i[0].value, 'title': i[2].value, 'subtitle': i[3].value, 'text': i[4].value, "data": raw_data }
+
+                case "set_list":
+                    media_source = document.worksheet('title','Data[Media]')
+                    raw_data = []
+                    for row in media_source:
+                        try:
+                            if row[0] != 'ID':
+                                if row[1] != "Social":
+                                    if row[1] != 'Image':
+                                        raw_data.append(row)
+                        except:
+                            print("no")
+                    page = {'name': i[0].value, 'title': i[2].value, 'subtitle': i[3].value, 'text': i[4].value, "data": raw_data }
+
+
+                case "testimonials":
+                    data_source = document.worksheet('title','Data[Forms]')
+                    raw_data = []
+                    for row in data_source:
+                        try:
+                            if row[0] != 'timestamp':
+                                if row[1] == 'testimonial':
+                                    if row[9] == 'Approved':
+                                        raw_data.append(row)
+                        except:
+                            print("no")
+                    page = {'name': i[0].value, 'title': i[2].value, 'subtitle': i[3].value, 'text': i[4].value, "data": raw_data }
+
+
+                case "socials":
+                    data_source = document.worksheet('title','Data[Media]')
+                    raw_data = []
+                    for row in data_source:
+                        try:
+                            if row[1] == 'Social':
+                                raw_data.append(row)
+                        except:
+                            print("no")
+                    page = {'name': i[0].value, 'title': i[2].value, 'subtitle': i[3].value, 'text': i[4].value, "data": raw_data }
+
+                case "nav":
+                    raw_data = []
+
+                    menu_data = home.range("A23:C32")
+                    menu = {}
+                    for opt in menu_data:
+                        print("m")
+                        print(opt[2])
+                        try:
+                            if opt[2].value == 'Enabled':
+                                menu = {'name': opt[0].value, 'link': opt[1].value}
+                                raw_data.append(menu)
+                        except:
+                            print("no")
+                    page = {'name': i[0].value, 'title': i[2].value, 'subtitle': i[3].value, 'text': i[4].value, "data": raw_data }
+
+                case _:
+                    page = {'name': i[0].value, 'title': i[2].value, 'subtitle': i[3].value, 'text': i[4].value, 'image': i[5].value }
+            page_data.append(page)
+
+    response = render_template('components/base.html', title=site_title)
+    for p in page_data:
+        print("page")
+        data = []
+        match p['name']:
+            case "upcoming_gigs":
+                data = p['data']
+            case "previous_gigs":
+                data = p['data']
+            case "set_list":
+                data = p['data']
+            case "testimonials":
+                data = p['data']
+            case "socials":
+                data = p['data']
+            case "nav":
+                data = p['data']
+            case _:
+                data = []
+                
+        response = response + render_template('components/'+p['name']+'.html', page_data=p, data=data)
+
+
+    f = open("web/templates/rendered/home.html", "w")
+    f.write(response)
+    f.close()
+    if headless == "42":
+        f = open("web/templates/rendered/index.html", "w")
+        f.write(response)
+        f.close()
+        response = redirect('/shutdown')
+    else:
+        response = redirect('/')
+
+    return response
 
 @app.route('/shutdown', methods=['GET','POST'])
 def shutdown():
     pid = os.getpid()
-    sys.exit(0)
+    print(pid)
+    #sys.exit(0)
     os.kill(pid, signal.SIGKILL)
     return str(pid)
-
-@app.route('/content/')
-@app.route('/content')
-@app.route('/r')
-def app_data():
-    page_data = {}
-    events  = []
-    shows  = []
-    tracks = []
-    page_data['site_title'] = home.cell('B2').value
-    page_data['header_title'] = home.cell('B6').value
-    page_data['header_text'] = home.cell('B7').value
-    page_data['header_button_text'] = home.cell('B8').value
-    page_data['header_button_link'] = home.cell('B9').value
-    page_data['header_footer_text'] = home.cell('B10').value
-
-    page_data['page2_title'] = home.cell('B12').value
-    page_data['page2_text'] = home.cell('B13').value
-    page_data['page2_button_text'] = home.cell('B14').value
-    page_data['page2_button_link'] = home.cell('B15').value
-
-    page_data['upcoming_events_title'] = home.cell('B17').value
-    page_data['upcoming_events_text'] = home.cell('B18').value
-    
-    page_data['music_title'] = home.cell('B20').value
-    page_data['music_text'] = home.cell('B21').value
-
-    page_data['bookings_title'] = home.cell('B23').value
-    page_data['bookings_subtitle'] = home.cell('B24').value
-    page_data['bookings_text'] = home.cell('B25').value
-
-    page_data['previous_events_title'] = home.cell('B27').value
-    socials = ['facebook','Instagram','Twitch','Twitter','Youtube','TikTok']
-
-    social_list = []
-    for i in range(30,35):
-        site = {'name': home.cell('A'+str(i)).value,'info': home.cell('B'+str(i)).value,'link': home.cell('C'+str(i)).value, 'icon': home.cell('D'+str(i)).value}
-        if home.cell('C'+str(i)).value != '':
-            social_list.append(site)
-
-
-    for row in music_src:
-        if row[1] != 'Name':
-            tracks.append(row)
-
-    for row in template:
-        if row[1] != 'Name':
-            if row[6] == 'Future':
-                events.append(row)
-            else:
-                shows.append(row)
-
-    response = render_template('mr1/dict.html', events=events, shows=shows, music=tracks, social=social_list, page_data=page_data)
-
-
-    f = open("web/templates/rendered/index.html", "w")
-    f.write(response)
-    f.close()
-    #return redirect("/", code=302)
-    if headless == True:
-        response = redirect('/shutdown')
-    else:
-        return response
 
 @app.route('/splash')
 def app_splash():
@@ -105,96 +195,88 @@ def app_splash():
     page_data['header_button_text'] = home.cell('B8').value
     page_data['header_button_link'] = home.cell('B9').value
 
+    social_list = []
+    for i in range(30,36):
+        site = {'name': home.cell('A'+str(i)).value,'info': home.cell('B'+str(i)).value,'icon': home.cell('C'+str(i)).value, 'link': home.cell('D'+str(i)).value}
+        if home.cell('D'+str(i)).value != '':
+            social_list.append(site)
 
-    response = render_template('splash/index.html', page_data=page_data)
+    response = render_template('splash/index.html', page_data=page_data, social=social_list)
 
     f = open("web/templates/rendered/index.html", "w")
     f.write(response)
     f.close()
 
     #return redirect("/", code=302)
-    if headless == 'True':
+    if headless == "42":
         return redirect('/shutdown')
     else:
         return response
 
 @app.route('/cd')
 def app_cd():
-    #shows = events.cell('B2').value
-    due_date=home.cell('B5').value
+    due_date=str(home.cell('D7').value)
     page_data={}
-    page_data['site_title'] = home.cell('B2').value
-    page_data['header_title'] = home.cell('B6').value
-    page_data['header_text'] = home.cell('B7').value
-    page_data['header_button_text'] = home.cell('B8').value
-    page_data['header_button_link'] = home.cell('B9').value
+    page_data['site_title'] = home.cell('C2').value
+    page_data['header_title'] = home.cell('D5').value
+    page_data['header_text'] = home.cell('D6').value
 
-    response = render_template('cd/index.html', page_data=page_data, due_date=due_date)
+    media_source = document.worksheet('title','Data[Media]')
 
-    f = open("web/templates/rendered/index.html", "w")
+    social_list = []
+    for row in media_source:
+        print(row)
+        if row[1] == 'Social':
+            social_list.append(row)
+    response = render_template('components/base.html')
+    if  home.cell('B9').value == 'Enabled':
+        response = response + render_template('components/nav.html', page_data=page_data)
+    response = response + render_template('components/countdown.html', socials=social_list, due_date=due_date, page_data=page_data)
+    if home.cell('B17').value == 'Enabled':
+        response = response + render_template('components/contact_form.html', page_data=page_data)
+    if home.cell('B18').value == 'Enabled':
+        response = response + render_template('components/socials.html', data=social_list)
+
+    f = open("web/templates/rendered/countdown.html", "w")    
     f.write(response)
     f.close()
-
-    #return redirect("/", code=302)
-    if headless == True:
+    if headless == "42":
+        f = open("web/templates/rendered/index.html", "w")
+        f.write(response)
+        f.close()
         response = redirect('/shutdown')
     else:
-        return response
+        response = redirect('/')
 
+    return response
 
 
 @app.route('/')
-def app_index():
+def app_root():
     homepage = home.cell('B4').value.lower()
-    print(os.environ['HEADLESS'])
     match homepage:
-        case "splash": 
-            return redirect("/splash", code=302)
         case "countdown":
-            return redirect("/cd", code=302)
+            if headless == "42":
+                response = redirect('/cd')
+            else:
+                try:
+                    response = render_template('rendered/countdown.html')
+                except:
+                    response = redirect('/cd')
         case "content":
-            return redirect("/content", code=302)
-        case _: 
-            return redirect("/error", code=301)
-
-@app.route('/error')
-def app_error():
-    response = render_template('error.html' )
-    return response
-
-
-
-def list(worksheet,cell):
-    source = document.worksheet('title',worksheet)
-    response = source.cell(cell).value
-    response_list = response.split(",")
-    return response_list
-
-@app.route('/ui/nav')
-def app_nav():
-    pages = list('H2','B3')
-    response = render_template('ui/navigation.html', pages=pages)
-    return response
-
-
-@app.route('/page/<name>')
-def app_page(name=None):
-    
-    source = document.worksheet('title',name)
-    page_title = source.cell('B2').value
-    page_type = source.cell('B3').value
-    page_header_image = source.cell('B4').value
-    page_header_text = source.cell('B5').value
-    page_bg_image = source.cell('B6').value
-    page_bg_color = source.cell('B7').value
-    include_menu =  source.cell('B8').value
-
-    print(include_menu)
-    response = render_template(page_type+'.html')
-    if include_menu == 'TRUE': 
-        response = response + app_nav()
+            if headless == "42":
+                response = redirect('/home')
+            else:
+                try:
+                    response = render_template('rendered/home.html')
+                except:
+                    response = redirect('/home')
+        case _:
+            response = render_template('error.html' )
 
     return response
+
+
 
 
 if __name__ == "__main__":

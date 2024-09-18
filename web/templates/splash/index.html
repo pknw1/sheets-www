@@ -42,17 +42,24 @@
 						<strong>{{ page_data['header_title'] }}</strong></h1>
 					<p class="mbr-text mbr-fonts-style mb-4 display-7">
 						 {{ page_data['header_text'] }}</p>
-					<div class="mbr-section-btn mt-3"><a class="btn btn-white-outline display-7" href="https://dollyparton.com">Dolly.com</a> <a class="btn btn-white-outline display-7" href="javascript:OpenModal('modal')">{{ page_data['header_button_label'] }}</a></div>
-				</div>
-			</div>
-<form name="submit-to-google-sheet">
-  <input name="email" type="email" placeholder="Subscribe to Newsletter" required>
-  <input name="type" type="string" value="newsletter" hidden>
-          <!--<input onclick="window.location.href = 'https://pklogin.pknw1.co.uk/';" hidden type="submit" value="Submit request" />
-	-->
-          <input onclick="javascript:OpenModal('modal')" hidden type="submit" value="Submit request" />
+					<div class="mbr-section-btn mt-3">
+						<a class="btn btn-white-outline display-7" href="https://dollyparton.com">Dolly.com</a> 
+					</div>
 
-</form>
+                {% for site in social %}
+                 <div class="soc-item col-auto">
+                         <a href="{{ site['link']}}" target="_blank" class="social__link">
+                                <span class="{{ site['icon']}}"></span>
+                        </a>
+                    </div>
+                 {% endfor %}
+
+			</div>
+
+
+
+
+			</div>
 
 		</div>
 	</div>
