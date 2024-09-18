@@ -36,8 +36,9 @@ jobs:
     - name: Build
       continue-on-error: true
       env:
-        HEADLESS: "True"
+        HEADLESS: "42"
       run: |
+        if ! [ -d web/static/rendered ]; then mkdir -p web/static/rendered; fi
         python ./app.py&
         sleep 10 && curl -L http://localhost:5000/
     - name: check
