@@ -2,3 +2,5 @@ __pycache__
 config/**
 .venv
 web/templates/rendered/**
+web/static/assets-drop/**
+web/static/assets-old/**
