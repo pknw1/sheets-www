@@ -1,0 +1,7 @@
+Dockerfile
+__pycache__
+app.py
+config
+docker-compose.yml
+requirements.txt
+web

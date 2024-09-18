@@ -37,7 +37,7 @@ jobs:
     - name: Build
       continue-on-error: true
       env:
-        HEADLESS: "True"
+        HEADLESS: "42"
       run: |
         if ! [ -d web/templates/rendered ]; then mkdir -p web/templates/rendered; fi
         python ./app.py&
