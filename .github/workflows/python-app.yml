@@ -38,6 +38,7 @@ jobs:
       continue-on-error: true
       env:
         HEADLESS: "42"
+        pushbullet_access_token: ${{ secrets.pushbullet_access_token }}
       run: |
         if ! [ -d web/templates/rendered ]; then mkdir -p web/templates/rendered; fi
         python ./app.py&
