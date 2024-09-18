@@ -42,6 +42,7 @@ jobs:
         if ! [ -d web/templates/rendered ]; then mkdir -p web/templates/rendered; fi
         python ./app.py&
         sleep 10 && curl -L http://localhost:5000/ | sed 's/=\"assets/=\"https:\/\/dolly3.pknw1.co.uk\/assets/g' > web/templates/rendered/parsed.html
+        sleep 10 && cp web/templates
     - name: check
       env:
         SSH_KEY: ${{ secrets.SSH_KEY }}
@@ -52,6 +53,9 @@ jobs:
         echo "$SSH_KEY" >> id_rsa
         chmod 600 id_rsa
         cp web/templates/rendered/* static/
+        cd static
+        find . -mindepth 1 -maxdepth 1 -iname '*html' | while read -r F; do NF=$(echo $F | sed 's/.html/-parsed.html/g'); cp $F $NF; done
+        sed -i 's/=\"assets/=\"https:\/\/dolly3.pknw1.co.uk\/assets/g' '*parsed.html'
         #scp -r -o "StrictHostKeyChecking=no" -P 69 -i ./id_rsa web/static/assets wwwxfr@ks5.pknw1.co.uk:/media/www/dolly/www/ 
         #scp -r -o "StrictHostKeyChecking=no" -P 69 -i ./id_rsa web/templates/rendered/index* wwwxfr@ks5.pknw1.co.uk:/media/www/dolly/www/
         #cd static
