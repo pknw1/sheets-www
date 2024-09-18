@@ -65,11 +65,13 @@ jobs:
         tar -zcvf ../static-xfr.tgz *
         cd ..
         scp -r -o "StrictHostKeyChecking=no" -P 69 -i ./id_rsa static-xfr.tgz wwwxfr@ks5.pknw1.co.uk:/media/www/dolly/www/
+
     - name: unpack
       env:
         SSH_KEY: ${{ secrets.SSH_KEY }}
       run: |
-        ssh -p 69 -i ./id_rsa wwwxfr@ks5.pknw1.co.uk -C 'ls -l'
+        ssh -p 69 -o "StrictHostKeyChecking=no" -i ./id_rsa wwwxfr@ks5.pknw1.co.uk -C 'cd www && find . -type f -iname '*tgz' -mmin -10 -exec tar zxvf "{}" \;'
+
         
 
     - name: Archive
